@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>寻找同行者 — 35,000公里真实公路纪实 · 品牌合作邀请</title>
+<style>
+  * { margin:0; padding:0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Georgia', 'PingFang SC', 'Microsoft YaHei', serif;
+    background: #F5F0E8;
+    color: #1A1A1A;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  .page {
+    width: 100%;
+    max-width: 210mm;
+    margin:0 auto;
+    min-height: 100vh;
+    background: #FEFCF8;
+    border: none;
+    padding: 24px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 桌面端加边框和阴影 */
+  @media (min-width: 768px) {
+    .page {
+      border:1px solid #C9A84C44;
+      padding: 40px 48px;
+      min-height: 297mm;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    body {
+      padding: 20px;
+      background: #F5F0E8;
+    }
+  }
+  
+  /* 顶部装饰线 */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #C9A84C 0%, #E8D5A3 50%, #C9A84C 100%);
+  }
+  
+  /* 底部装饰线 */
+  .page::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: #C9A84C44;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #C9A84C33;
+  }
+  
+  .header .en-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #C9A84C;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    color: #1A1A1A;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .header .subtitle {
+    font-size: 13px;
+    color: #4A4A4A;
+    letter-spacing: 1px;
+  }
+  
+  .section {
+    margin-bottom: 22px;
+  }
+  
+  .section-title {
+    font-size: 14px;
+    color: #C9A84C;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid #C9A84C;
+    font-weight: bold;
+  }
+  
+  /* 数据条 */
+  .stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 18px 0;
+    padding: 14px 0;
+    border-top: 1px solid #C9A84C22;
+    border-bottom: 1px solid #C9A84C22;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .stat-item {
+    text-align: center;
+    min-width: 60px;
+  }
+  
+  .stat-num {
+    font-size: 24px;
+    color: #C9A84C;
+    font-weight: bold;
+    display: block;
+  }
+  
+  .stat-label {
+    font-size: 10px;
+    color: #6B7280;
+    margin-top: 4px;
+    display: block;
+  }
+  
+  /* 品类卡片 */
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  @media (min-width: 768px) {
+    .category-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stats {
+      flex-wrap: nowrap;
+    }
+  }
+  
+  .category-card {
+    background: #FFFFFF;
+    border: 1px solid #C9A84C22;
+    border-radius: 4px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  
+  .category-card .icon {
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  
+  .category-card .cat-name {
+    font-size: 14px;
+    color: #1A1A1A;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  
+  .category-card .brands {
+    font-size: 12px;
+    color: #C9A84C;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  
+  .category-card .form {
+    font-size: 11px;
+    color: #6B7280;
+    line-height: 1.5;
+  }
+  
+  /* 回报列表 */
+  .return-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .return-list li {
+    padding: 10px 0 10px 20px;
+    position: relative;
+    font-size: 13px;
+    color: #4A4A4A;
+    line-height: 1.6;
+    border-bottom: 1px solid #C9A84C11;
+  }
+  
+  .return-list li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: #C9A84C;
+    font-size: 8px;
+    top: 12px;
+  }
+  
+  .return-list li strong {
+    color: #1A1A1A;
+    display: block;
+    margin-bottom: 2px;
+  }
+  
+  /* 合作原则 */
+  .principles {
+    background: #FFF9F0;
+    border: 1px solid #C9A84C22;
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-top: 14px;
+  }
+  
+  .principles .prin-title {
+    font-size: 12px;
+    color: #C9A84C;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .principles .prin-text {
+    font-size: 12px;
+    color: #6B7280;
+    line-height: 2;
+  }
+  
+  /* 底部联系 */
+  .footer {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #C9A84C33;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .footer .contact {
+    font-size: 12px;
+    color: #6B7280;
+    line-height: 1.8;
+  }
+  
+  .footer .contact .label {
+    color: #C9A84C;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  
+  .footer .slogan {
+    font-size: 10px;
+    color: #9CA3AF;
+    letter-spacing: 2px;
+    font-style: italic;
+  }
+  
+  /* 桌面端微调 */
+  @media (min-width: 768px) {
+    .header h1 {
+      font-size: 32px;
+      letter-spacing: 6px;
+    }
+    .header .en-sub {
+      font-size: 11px;
+      letter-spacing: 4px;
+    }
+    .stat-num {
+      font-size: 26px;
+    }
+    .stat-label {
+      font-size: 11px;
+    }
+  }
+  
+  @media print {
+    body { padding:0; background: white; }
+    .page { border: none; max-width: 100%; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  
+  <!-- 头部 -->
+  <div class="header">
+    <div class="en-sub">SEEKING PARTNERS · BRAND COLLABORATION</div>
+    <h1>寻找同行者</h1>
+    <div class="subtitle">35,000公里真实公路纪实 · 期待与您一起抵达远方</div>
+  </div>
+  
+  <!-- 数据条 -->
+  <div class="stats">
+    <div class="stat-item">
+      <span class="stat-num">35,000</span>
+      <span class="stat-label">总里程（公里）</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3</span>
+      <span class="stat-label">大洲</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">国家</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">8</span>
+      <span class="stat-label">个月</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">500万+</span>
+      <span class="stat-label">预计播放量</span>
+    </div>
+  </div>
+  
+  <!-- 我们正在寻找 -->
+  <div class="section">
+    <div class="section-title">我们正在寻找这些伙伴</div>
+    <div class="category-grid">
+      <div class="category-card">
+        <div class="icon">🥛</div>
+        <div class="cat-name">食品饮料</div>
+        <div class="brands">伊利 · 蒙牛 · 雀巢 · 元气森林</div>
+        <div class="form">每日Vlog自然出现，真实饮用场景，无脚本植入</div>
+      </div>
+      <div class="category-card">
+        <div class="icon">🏔️</div>
+        <div class="cat-name">户外装备</div>
+        <div class="brands">始祖鸟 · 北面 · 迪卡侬 · 探路者</div>
+        <div class="form">极限环境验证，穿搭自然出镜，功能真实测试</div>
+      </div>
+      <div class="category-card">
+        <div class="icon">🔧</div>
+        <div class="cat-name">汽车用品</div>
+        <div class="brands">美孚 · 米其林 · 博世 · 3M</div>
+        <div class="form">老车保障伙伴，真实使用记录，数据可查证</div>
+      </div>
+      <div class="category-card">
+        <div class="icon">📷</div>
+        <div class="cat-name">摄影器材</div>
+        <div class="brands">GoPro · 大疆 · 索尼 · Insta360</div>
+        <div class="form">内容创作伙伴，设备全程跟拍，画质见证实力</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 品牌将获得 -->
+  <div class="section">
+    <div class="section-title">品牌将获得的回报</div>
+    <ul class="return-list">
+      <li><strong>真实场景植入</strong>非广告，是自然使用。用户信任度远高于传统KOL摆拍植入，播放完成率更高。</li>
+      <li><strong>多平台矩阵曝光</strong>抖音 / 微博 / 视频号 / B站同步发布，预计总播放量500万+，互动量20万+。</li>
+      <li><strong>时间海报永久鸣谢</strong>A1尺寸艺术微喷海报（申请进入奥迪博物馆）设品牌鸣谢区，与旅程共同被历史记录。</li>
+      <li><strong>极限环境测试报告</strong>零下20°C西伯利亚冷启动、撒哈拉50°C高温耐受，真实数据比任何实验室报告都有说服力。</li>
+      <li><strong>家庭视角情感共鸣</strong>7岁儿子的视角拍摄，引发父母群体强烈共鸣，女性+家庭用户精准触达。</li>
+    </ul>
+  </div>
+  
+  <!-- 合作原则 -->
+  <div class="principles">
+    <div class="prin-title">合作原则</div>
+    <div class="prin-text">
+      ① 以产品赞助为主，降低合作门槛 · 我们理解预算有限，产品置换也是真诚的合作<br>
+      ② 真实使用，不写软文 · 观众相信眼睛，不相信文案<br>
+      ③ 与Audi品牌精神一致：真诚、可靠、探索未知 · 不接受与旅程调性冲突的品牌<br>
+      ④ 名额有限，先到先得 · 每个品类只选一个合作伙伴，保证 exclusivity
+    </div>
+  </div>
+  
+  <!-- 底部 -->
+  <div class="footer">
+    <div class="contact">
+      <div class="label">CONTACT</div>
+      手机：139-0472-0389<br>
+      抖音：Wzt19922000（草原王·情怀老车）
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
