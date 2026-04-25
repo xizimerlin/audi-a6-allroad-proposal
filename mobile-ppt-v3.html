@@ -2,128 +2,169 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>致敬时间·探寻无界 — 奥迪A6 allroad品牌提案</title>
 <style>
-*, *::before, *::after { margin:0; padding:0; box-sizing: border-box; }
-html, body { width:100%; height:100%; font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; background:#F5F0E8; color:#1A1A1A; overflow:hidden; -webkit-font-smoothing:antialiased; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;font-family:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#F5F0E8;color:#1A1A1A;overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.swiper{width:100%;height:100vh}
+.swiper-slide{width:100%;height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
 
-.swiper { width:100%; height:100vh; }
-.swiper-slide { width:100%; height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+.progress-bar{position:fixed;top:0;left:0;right:0;height:3px;background:#C9A84C22;z-index:100}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#E8D5A3);transition:width .4s ease}
+.page-indicator{position:fixed;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:5px;z-index:100}
+.page-dot{width:4px;height:4px;border-radius:50%;background:#C9A84C33;transition:all .3s ease}
+.page-dot.active{background:#C9A84C;height:16px;border-radius:3px}
+.slide-num{position:absolute;top:14px;right:16px;font-size:9px;letter-spacing:1.5px;color:#C9A84C44;font-family:Arial,sans-serif;font-weight:600;z-index:10}
+.gold-top-bar{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C)}
+.gold-bottom-bar{position:absolute;bottom:0;left:0;right:0;height:1px;background:#C9A84C22}
 
-.progress-bar { position:fixed; top:0; left:0; right:0; height:3px; background:#C9A84C22; z-index:100; }
-.progress-fill { height:100%; width:0%; background:linear-gradient(90deg,#C9A84C,#E8D5A3); transition:width 0.4s ease; }
+/* 核心：移动端优化的内容区 */
+.slide-inner{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  padding:44px 18px 32px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  position:relative;
+  z-index:2;
+  touch-action:pan-y;
+  overscroll-behavior:contain
+}
+.slide-inner::-webkit-scrollbar{display:none}
 
-.page-indicator { position:fixed; right:12px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:6px; z-index:100; }
-.page-dot { width:5px; height:5px; border-radius:50%; background:#C9A84C33; transition:all 0.3s ease; }
-.page-dot.active { background:#C9A84C; height:18px; border-radius:3px; }
+/* ===== 字号体系（全面缩小） ===== */
+.en-label{font-family:Arial,sans-serif;font-size:9px;letter-spacing:3px;color:#C9A84C;margin-bottom:7px;font-weight:600;text-transform:uppercase}
+.big-title{font-size:23px;font-weight:800;letter-spacing:3px;line-height:1.35;color:#1A1A1A;margin-bottom:8px;text-align:left}
+.section-num{font-family:Georgia,serif;font-size:56px;font-weight:800;color:#C9A84C11;line-height:1;margin-bottom:-16px;user-select:none;text-align:left}
+.section-title{font-size:19px;font-weight:800;letter-spacing:2px;color:#1A1A1A;margin-bottom:5px;text-align:left}
+.section-en{font-size:10px;color:#C9A84C;letter-spacing:1.5px;margin-bottom:14px;font-family:Arial,sans-serif;text-align:left}
+.gold-divider{width:40px;height:2px;background:#C9A84C;margin:10px 0 14px}
 
-.slide-num { position:absolute; top:18px; right:18px; font-size:10px; letter-spacing:2px; color:#C9A84C55; font-family:'Arial',sans-serif; font-weight:600; z-index:10; }
+/* ===== 卡片组件（压缩间距） ===== */
+.info-card{
+  background:#FFF;
+  border:1px solid #E8E4DC;
+  border-radius:10px;
+  padding:13px 13px;
+  margin-bottom:10px;
+  box-shadow:0 1px 6px rgba(0,0,0,.03);
+  position:relative;
+  overflow:hidden;
+  text-align:left
+}
+.info-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#C9A84C44}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.card-icon{font-size:22px;flex-shrink:0;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#C9A84C0D;border-radius:8px}
+.card-title{font-size:13px;font-weight:700;color:#1A1A1A}
+.card-body{font-size:12.5px;color:#4A4A4A;line-height:1.75;text-align:left}
 
-.gold-top-bar { position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C); }
-.gold-bottom-bar { position:absolute; bottom:0; left:0; right:0; height:1px; background:#C9A84C22; }
+/* 时间线 */
+.timeline-wrap{position:relative;padding-left:20px;margin-top:3px}
+.timeline-wrap::before{content:'';position:absolute;left:5px;top:5px;bottom:5px;width:1px;background:linear-gradient(180deg,#C9A84C,#E8D5A3,#C9A84C)}
+.tl-item{position:relative;margin-bottom:13px;text-align:left}
+.tl-dot{position:absolute;left:-19px;top:3px;width:8px;height:8px;border-radius:50%;background:#C9A84C;border:2px solid #F5F0E8;box-shadow:0 0 0 2px #C9A84C33}
+.tl-dot.gold{background:#E8D5A3;box-shadow:0 0 6px #C9A84C44}
+.tl-year{font-size:10px;color:#C9A84C;font-weight:700;font-family:Arial,sans-serif;letter-spacing:.8px;margin-bottom:1px}
+.tl-text{font-size:12.5px;color:#1A1A1A;line-height:1.55}
 
-.slide-inner { flex:1; display:flex; flex-direction:column; padding:52px 24px 36px; overflow-y:auto; -webkit-overflow-scrolling:touch; position:relative; z-index:2; }
-.slide-inner::-webkit-scrollbar { display:none; }
+/* 统计数据行 */
+.stats-row{display:flex;justify-content:space-around;padding:12px 0;margin:12px 0;border-top:1px solid #C9A84C22;border-bottom:1px solid #C9A84C22}
+.stat-item{text-align:center;flex:1}
+.stat-num{font-size:26px;font-weight:800;color:#C9A84C;font-family:Georgia,serif;display:block;line-height:1.15}
+.stat-label{font-size:10px;color:#9CA3AF;margin-top:3px;display:block;letter-spacing:.8px}
 
-.en-label { font-family:'Arial','Helvetica Neue',sans-serif; font-size:10px; letter-spacing:4px; color:#C9A84C; margin-bottom:10px; font-weight:600; text-transform:uppercase; }
-.big-title { font-size:28px; font-weight:800; letter-spacing:4px; line-height:1.35; color:#1A1A1A; margin-bottom:12px; text-align:left; }
-.section-num { font-family:'Georgia',serif; font-size:72px; font-weight:800; color:#C9A84C11; line-height:1; margin-bottom:-20px; user-select:none; text-align:left; }
-.section-title { font-size:22px; font-weight:800; letter-spacing:3px; color:#1A1A1A; margin-bottom:6px; text-align:left; }
-.section-en { font-size:11px; color:#C9A84C; letter-spacing:2px; margin-bottom:20px; font-family:'Arial',sans-serif; text-align:left; }
-.gold-divider { width:48px; height:2px; background:#C9A84C; margin:14px 0 18px; }
+/* 路线 */
+.route-wrap{position:relative;padding-left:20px}
+.route-wrap::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,#C9A84C55,#E8D5A355,#C9A84C55)}
+.route-item{position:relative;padding:9px 11px;background:#FFF;border:1px solid #E8E4DC;border-radius:8px;margin-bottom:7px;box-shadow:0 1px 6px rgba(0,0,0,.02);text-align:left}
+.route-dot{position:absolute;left:-19px;top:14px;width:8px;height:8px;border-radius:50%;background:#C9A84C;border:2px solid #F5F0E8;box-shadow:0 0 0 2px #C9A84C33}
+.route-dot.hl{background:#E8D5A3;box-shadow:0 0 8px #C9A84C55}
+.route-name{font-size:12.5px;font-weight:700;color:#1A1A1A;margin-bottom:2px}
+.route-detail{font-size:10px;color:#9CA3AF;line-height:1.45}
 
-.info-card { background:#FFFFFF; border:1px solid #E8E4DC; border-radius:12px; padding:18px 16px; margin-bottom:12px; box-shadow:0 2px 12px rgba(0,0,0,0.04); position:relative; overflow:hidden; text-align:left; }
-.info-card::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:#C9A84C44; }
-.card-head { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-.card-icon { font-size:26px; flex-shrink:0; width:40px; height:40px; display:flex; align-items:center; justify-content:center; background:#C9A84C0D; border-radius:10px; }
-.card-title { font-size:15px; font-weight:700; color:#1A1A1A; }
-.card-body { font-size:14px; color:#4A4A4A; line-height:1.85; text-align:left; }
+/* 参数网格 */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.spec-item{background:#FFF;border:1px solid #E8E4DC;border-radius:10px;padding:12px 9px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,.02);position:relative;overflow:hidden}
+.spec-icon{font-size:22px;margin-bottom:5px;display:block}
+.spec-label{font-size:9px;color:#9CA3AF;margin-bottom:3px;letter-spacing:.8px}
+.spec-value{font-size:17px;font-weight:800;color:#1A1A1A}
+.spec-detail{font-size:8.5px;color:#9CA3AF;margin-top:3px;line-height:1.35}
 
-.timeline-wrap { position:relative; padding-left:22px; margin-top:4px; }
-.timeline-wrap::before { content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:linear-gradient(180deg,#C9A84C,#E8D5A3,#C9A84C); }
-.tl-item { position:relative; margin-bottom:18px; text-align:left; }
-.tl-dot { position:absolute; left:-20px; top:4px; width:10px; height:10px; border-radius:50%; background:#C9A84C; border:2px solid #F5F0E8; box-shadow:0 0 0 2px #C9A84C33; }
-.tl-dot.gold { background:#E8D5A3; box-shadow:0 0 8px #C9A84C44; }
-.tl-year { font-size:11px; color:#C9A84C; font-weight:700; font-family:'Arial',sans-serif; letter-spacing:1px; margin-bottom:2px; }
-.tl-text { font-size:14px; color:#1A1A1A; line-height:1.65; }
+.tag{display:inline-block;padding:4px 11px;background:#C9A84C0D;border:1px solid #C9A84C33;border-radius:16px;font-size:10px;color:#C9A84C;letter-spacing:.8px;font-weight:500}
 
-.stats-row { display:flex; justify-content:space-around; padding:18px 0; margin:16px 0; border-top:1px solid #C9A84C22; border-bottom:1px solid #C9A84C22; }
-.stat-item { text-align:center; flex:1; }
-.stat-num { font-size:30px; font-weight:800; color:#C9A84C; font-family:'Georgia',serif; display:block; line-height:1.2; }
-.stat-label { font-size:11px; color:#9CA3AF; margin-top:4px; display:block; letter-spacing:1px; }
+.quote-block{
+  font-size:12.5px;
+  color:#4A4A4A;
+  line-height:1.85;
+  font-style:italic;
+  border-left:3px solid #C9A84C;
+  padding:9px 13px;
+  margin:12px 0;
+  background:#C9A84C08;
+  border-radius:0 8px 8px 0;
+  text-align:left
+}
 
-.route-wrap { position:relative; padding-left:22px; }
-.route-wrap::before { content:''; position:absolute; left:5px; top:8px; bottom:8px; width:1px; background:linear-gradient(180deg,#C9A84C55,#E8D5A355,#C9A84C55); }
-.route-item { position:relative; padding:12px 14px; background:#FFFFFF; border:1px solid #E8E4DC; border-radius:10px; margin-bottom:10px; box-shadow:0 2px 8px rgba(0,0,0,0.03); text-align:left; }
-.route-dot { position:absolute; left:-20px; top:18px; width:10px; height:10px; border-radius:50%; background:#C9A84C; border:2px solid #F5F0E8; box-shadow:0 0 0 2px #C9A84C33; }
-.route-dot.hl { background:#E8D5A3; box-shadow:0 0 10px #C9A84C55; }
-.route-name { font-size:14px; font-weight:700; color:#1A1A1A; margin-bottom:3px; }
-.route-detail { font-size:11px; color:#9CA3AF; line-height:1.5; }
+/* 目录 */
+.toc-item{display:flex;align-items:flex-start;padding:12px 12px;background:#FFF;border:1px solid #E8E4DC;border-radius:10px;margin-bottom:8px;box-shadow:0 1px 8px rgba(0,0,0,.02);position:relative;overflow:hidden;text-align:left}
+.toc-item::after{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#C9A84C44}
+.toc-num{font-family:Georgia,serif;font-size:24px;font-weight:800;color:#C9A84C;min-width:40px;line-height:1.2}
+.toc-text{flex:1;padding-left:3px}
+.toc-title{font-size:13px;font-weight:700;color:#1A1A1A}
+.toc-sub{font-size:10px;color:#9CA3AF;margin-top:3px;line-height:1.45}
 
-.spec-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
-.spec-item { background:#FFFFFF; border:1px solid #E8E4DC; border-radius:12px; padding:16px 12px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.03); position:relative; overflow:hidden; }
-.spec-icon { font-size:26px; margin-bottom:8px; display:block; }
-.spec-label { font-size:10px; color:#9CA3AF; margin-bottom:4px; letter-spacing:1px; }
-.spec-value { font-size:20px; font-weight:800; color:#1A1A1A; }
-.spec-detail { font-size:9px; color:#9CA3AF; margin-top:4px; }
+/* 家庭成员卡片 */
+.family-card{display:flex;align-items:flex-start;padding:12px;background:#FFF;border:1px solid #E8E4DC;border-radius:10px;margin-bottom:10px;box-shadow:0 1px 8px rgba(0,0,0,.02);text-align:left}
+.family-avatar{width:44px;height:44px;border-radius:50%;background:#1A1A1A;display:flex;align-items:center;justify-content:center;font-size:22px;margin-right:11px;flex-shrink:0;border:2px solid #C9A84C33}
+.family-info{flex:1;padding-top:1px}
+.family-name{font-size:13px;font-weight:700;color:#1A1A1A}
+.family-desc{font-size:11.5px;color:#6B7280;line-height:1.65;margin-top:3px}
 
-.tag { display:inline-block; padding:5px 14px; background:#C9A84C0D; border:1px solid #C9A84C33; border-radius:20px; font-size:11px; color:#C9A84C; letter-spacing:1px; font-weight:500; }
+/* 赞助商 */
+.sponsor-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.sponsor-item{background:#FFF;border:1px solid #E8E4DC;border-radius:10px;padding:12px 9px;text-align:center;box-shadow:0 1px 8px rgba(0,0,0,.02)}
+.sponsor-icon{font-size:24px;margin-bottom:6px;display:block}
+.sponsor-name{font-size:12px;color:#1A1A1A;font-weight:700}
+.sponsor-brands{font-size:9px;color:#C9A84C;margin-top:3px;line-height:1.45}
 
-.quote-block { font-size:14px; color:#4A4A4A; line-height:2; font-style:italic; border-left:3px solid #C9A84C; padding:12px 16px; margin:16px 0; background:#C9A84C08; border-radius:0 10px 10px 0; text-align:left; }
+/* 海报框 */
+.poster-box{background:linear-gradient(135deg,#1A1A1A 0%,#2D2D2D 100%);border-radius:12px;padding:17px 14px;margin:12px 0;position:relative;overflow:hidden;text-align:left}
+.poster-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C)}
+.poster-title{font-size:13px;color:#E8D5A3;letter-spacing:1.5px;margin-bottom:11px;font-weight:700}
 
-.toc-item { display:flex; align-items:flex-start; padding:16px 16px; background:#FFFFFF; border:1px solid #E8E4DC; border-radius:12px; margin-bottom:10px; box-shadow:0 2px 10px rgba(0,0,0,0.03); transition:all 0.3s ease; position:relative; overflow:hidden; text-align:left; }
-.toc-item::after { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:#C9A84C44; transition:width 0.3s ease; }
-.toc-num { font-family:'Georgia',serif; font-size:28px; font-weight:800; color:#C9A84C; min-width:48px; line-height:1.2; }
-.toc-text { flex:1; padding-left:4px; }
-.toc-title { font-size:15px; font-weight:700; color:#1A1A1A; }
-.toc-sub { font-size:11px; color:#9CA3AF; margin-top:4px; line-height:1.5; }
+/* 暗色主题 */
+.slide-dark{background:#141414;color:#E8E6E1}
+.slide-dark .big-title{color:#E8D5A3}
+.slide-dark .sub-text{color:#9CA3AF}
+.slide-dark .section-title{color:#E8D5A3}
+.slide-dark .section-en{color:#C9A84C}
+.slide-dark .quote-block{color:#D1D5DB;background:#C9A84C11}
+.slide-dark .info-card{background:#1E1E1E;border-color:#C9A84C22}
+.slide-dark .info-card::before{background:#C9A84C33}
+.slide-dark .card-title{color:#E8D5A3}
+.slide-dark .card-body{color:#9CA3AF}
+.slide-dark .slide-num{color:#C9A84C33}
+.slide-dark .route-item{background:#1E1E1E;border-color:#C9A84C22}
+.slide-dark .route-name{color:#E8D5A3}
+.slide-dark .gold-bottom-bar{background:#C9A84C22}
+.slide-dark .en-label{color:#C9A84C}
 
-.family-card { display:flex; align-items:flex-start; padding:16px; background:#FFFFFF; border:1px solid #E8E4DC; border-radius:12px; margin-bottom:12px; box-shadow:0 2px 10px rgba(0,0,0,0.03); text-align:left; }
-.family-avatar { width:54px; height:54px; border-radius:50%; background:#1A1A1A; display:flex; align-items:center; justify-content:center; font-size:26px; margin-right:14px; flex-shrink:0; border:2px solid #C9A84C33; }
-.family-info { flex:1; padding-top:2px; }
-.family-name { font-size:15px; font-weight:700; color:#1A1A1A; }
-.family-desc { font-size:13px; color:#6B7280; line-height:1.75; margin-top:4px; }
+/* 动画 */
+.anim-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.anim-up.in{opacity:1;transform:translateY(0)}
+.anim-left{opacity:0;transform:translateX(-24px);transition:opacity .6s ease .1s,transform .6s ease .1s}
+.anim-left.in{opacity:1;transform:translateX(0)}
+.anim-right{opacity:0;transform:translateX(24px);transition:opacity .6s ease .18s,transform .6s ease .18s}
+.anim-right.in{opacity:1;transform:translateX(0)}
+.anim-scale{opacity:0;transform:scale(.92);transition:opacity .6s ease,transform .6s ease}
+.anim-scale.in{opacity:1;transform:scale(1)}
 
-.sponsor-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px; }
-.sponsor-item { background:#FFFFFF; border:1px solid #E8E4DC; border-radius:12px; padding:16px 12px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.03); }
-.sponsor-icon { font-size:28px; margin-bottom:8px; display:block; }
-.sponsor-name { font-size:13px; color:#1A1A1A; font-weight:700; }
-.sponsor-brands { font-size:10px; color:#C9A84C; margin-top:4px; line-height:1.5; }
-
-.poster-box { background:linear-gradient(135deg,#1A1A1A 0%,#2D2D2D 100%); border-radius:14px; padding:22px 18px; margin:16px 0; position:relative; overflow:hidden; text-align:left; }
-.poster-box::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C); }
-.poster-title { font-size:15px; color:#E8D5A3; letter-spacing:2px; margin-bottom:14px; font-weight:700; }
-
-.slide-dark { background:#141414; color:#E8E6E1; }
-.slide-dark .big-title { color:#E8D5A3; }
-.slide-dark .sub-text { color:#9CA3AF; }
-.slide-dark .section-title { color:#E8D5A3; }
-.slide-dark .section-en { color:#C9A84C; }
-.slide-dark .quote-block { color:#D1D5DB; background:#C9A84C11; }
-.slide-dark .info-card { background:#1E1E1E; border-color:#C9A84C22; }
-.slide-dark .info-card::before { background:#C9A84C33; }
-.slide-dark .card-title { color:#E8D5A3; }
-.slide-dark .card-body { color:#9CA3AF; }
-.slide-dark .slide-num { color:#C9A84C33; }
-.slide-dark .route-item { background:#1E1E1E; border-color:#C9A84C22; }
-.slide-dark .route-name { color:#E8D5A3; }
-.slide-dark .gold-bottom-bar { background:#C9A84C22; }
-.slide-dark .en-label { color:#C9A84C; }
-
-.anim-up { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease,transform 0.65s ease; }
-.anim-up.in { opacity:1; transform:translateY(0); }
-.anim-left { opacity:0; transform:translateX(-28px); transition:opacity 0.65s ease 0.12s,transform 0.65s ease 0.12s; }
-.anim-left.in { opacity:1; transform:translateX(0); }
-.anim-right { opacity:0; transform:translateX(28px); transition:opacity 0.65s ease 0.22s,transform 0.65s ease 0.22s; }
-.anim-right.in { opacity:1; transform:translateX(0); }
-.anim-scale { opacity:0; transform:scale(0.9); transition:opacity 0.65s ease,transform 0.65s ease; }
-.anim-scale.in { opacity:1; transform:scale(1); }
-
-@media (min-width:420px) {
-  .slide-inner { padding:60px 36px 44px; }
-  .big-title { font-size:32px; }
-  .section-title { font-size:24px; }
+@media(min-width:420px){
+  .slide-inner{padding:52px 32px 38px}
+  .big-title{font-size:27px}
+  .section-title{font-size:22px}
 }
 </style>
 </head>
@@ -136,645 +177,464 @@ html, body { width:100%; height:100%; font-family:'PingFang SC','Hiragino Sans G
 <div class="swiper-wrapper">
 
 <!-- SLIDE 1: COVER -->
-<div class="swiper-slide slide-dark" style="background:url('cover.png') center center / cover no-repeat; position:relative;">
-  <div class="gold-top-bar"></div>
-  <!-- 暗色渐变遮罩：保证文字清晰可读 -->
-  <div style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:0;
-    background:
-      linear-gradient(180deg, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.38) 30%, rgba(10,10,10,0.22) 55%, rgba(10,10,10,0.75) 100%),
-      linear-gradient(135deg, rgba(201,168,76,0.06) 0%, transparent 60%);
-  "></div>
-  <!-- 顶部金色光晕 -->
-  <div style="position:absolute;top:-20%;left:-10%;width:120%;height:70%;z-index:0;
-    background:radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.10) 0%, transparent 70%);
-  "></div>
-  <div class="slide-inner" style="justify-content:center;align-items:center;text-align:center;position:relative;z-index:2;">
-    <div class="anim-up">
-      <div class="en-label" style="font-size:11px;letter-spacing:5px;margin-bottom:18px;text-align:center;">FAMILY ROAD TRIP . BRAND PROPOSAL</div>
-    </div>
-    <div class="anim-up" style="margin-bottom:20px;">
-      <div style="font-size:26px;letter-spacing:8px;color:#E8D5A3;font-weight:800;line-height:1.7;">致敬时间</div>
-      <div style="font-size:26px;letter-spacing:8px;color:#E8D5A3;font-weight:800;line-height:1.7;">探寻无界</div>
-    </div>
-    <div class="anim-up" style="margin:10px 0 24px;">
-      <div style="font-size:11px;letter-spacing:4px;color:#9CA3AF;text-align:center;">HONORING TIME . BOUNDLESS EXPLORATION</div>
-    </div>
-    <div class="anim-scale" style="width:48px;height:2px;background:#C9A84C;margin:0 auto 24px;"></div>
-    <div class="anim-up" style="max-width:320px;">
-      <div style="font-size:14px;color:#D1D5DB;line-height:2.4;text-align:center;">
-        一台2004款奥迪A6 allroad<br>亚欧非 . 35,000公里真实公路纪实企划
-      </div>
-    </div>
-    <div style="flex:1;"></div>
-    <div class="anim-up" style="font-size:10px;color:#6B7280;letter-spacing:3px;font-style:italic;margin-top:28px;">
-      2026 . FAMILY ROAD PROPOSAL
-    </div>
+<div class="swiper-slide slide-dark" style="background:url('cover.png') center center/cover no-repeat;position:relative;">
+<div class="gold-top-bar"></div>
+<!-- 暗色遮罩 -->
+<div style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:0;
+  background:linear-gradient(180deg,rgba(10,10,10,.78)0%,rgba(10,10,10,.36)30%,rgba(10,10,10,.2)55%,rgba(10,10,10,.74)100%),
+  linear-gradient(135deg,rgba(201,168,76,.05)0%,transparent 60%);"></div>
+<div style="position:absolute;top:-20%;left:-10%;width:120%;height:70%;z-index:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.09)0%,transparent 70%);"></div>
+<div class="slide-inner" style="justify-content:center;align-items:center;text-align:center;position:relative;z-index:2;">
+<div class="anim-up">
+  <div class="en-label" style="font-size:10px;letter-spacing:4px;margin-bottom:14px;text-align:center;">FAMILY ROAD TRIP · BRAND PROPOSAL</div>
+</div>
+<div class="anim-up" style="margin-bottom:16px;">
+  <div style="font-size:24px;letter-spacing:6px;color:#E8D5A3;font-weight:800;line-height:1.7">致敬时间</div>
+  <div style="font-size:24px;letter-spacing:6px;color:#E8D5A3;font-weight:800;line-height:1.7">探寻无界</div>
+</div>
+<div class="anim-up" style="margin:8px 0 20px;">
+  <div style="font-size:10px;letter-spacing:3px;color:#9CA3AF;text-align:center;">HONORING TIME · BOUNDLESS EXPLORATION</div>
+</div>
+<div class="anim-scale" style="width:40px;height:2px;background:#C9A84C;margin:0 auto 20px;"></div>
+<div class="anim-up" style="max-width:300px;">
+  <div style="font-size:13px;color:#D1D5DB;line-height:2.2;text-align:center;">
+    一台2004款奥迪A6 allroad<br>亚欧非 · 35,000公里真实公路纪实企划
   </div>
-  <div class="gold-bottom-bar" style="background:#C9A84C22;"></div>
+</div>
+<div style="flex:1"></div>
+<div class="anim-up" style="font-size:9px;color:#6B7280;letter-spacing:2.5px;font-style:italic;margin-top:22px;">
+  2026 · FAMILY ROAD PROPOSAL
+</div>
+</div>
+<div class="gold-bottom-bar" style="background:#C9A84C22"></div>
 </div>
 
 <!-- SLIDE 2: TOC -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">00</div>
-    <div class="section-num anim-up">00</div>
-    <div class="anim-up">
-      <div class="en-label">TABLE OF CONTENTS . 目录</div>
-      <div class="big-title" style="font-size:22px;margin-bottom:18px;">一份不卑不亢的<br>家庭梦想提案</div>
-    </div>
-    <div>
-      <div class="anim-left"><div class="toc-item">
-        <div class="toc-num">01</div>
-        <div class="toc-text"><div class="toc-title">核心资产</div><div class="toc-sub">无法复制的品牌羁绊 . 23年 . 11台奥迪</div></div>
-      </div></div>
-      <div class="anim-right"><div class="toc-item">
-        <div class="toc-num">02</div>
-        <div class="toc-text"><div class="toc-title">极限征途</div><div class="toc-sub">车轮上的世界观重塑 . 35,000公里路线</div></div>
-      </div></div>
-      <div class="anim-left"><div class="toc-item">
-        <div class="toc-num">03</div>
-        <div class="toc-text"><div class="toc-title">核心高光</div><div class="toc-sub">跨越三万公里的回家路 . 朝圣MAC因戈尔施塔特</div></div>
-      </div></div>
-      <div class="anim-right"><div class="toc-item">
-        <div class="toc-num">04</div>
-        <div class="toc-text"><div class="toc-title">内容矩阵</div><div class="toc-sub">粗糙的真实碾压精致的伪装 . 8个月高黏性</div></div>
-      </div></div>
-      <div class="anim-left"><div class="toc-item" style="border-color:#C9A84C44;">
-        <div class="toc-num" style="color:#E8D5A3;">05</div>
-        <div class="toc-text"><div class="toc-title">战略护航</div><div class="toc-sub">共创与互惠 . 不卑不亢的提案</div></div>
-      </div></div>
-    </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">00</div>
+<div class="section-num anim-up">00</div>
+<div class="anim-up">
+  <div class="en-label">TABLE OF CONTENTS · 目录</div>
+  <div class="big-title" style="font-size:20px;margin-bottom:14px;">一份不卑不亢的<br>家庭梦想提案</div>
+</div>
+<div>
+  <div class="anim-left"><div class="toc-item"><div class="toc-num">01</div><div class="toc-text"><div class="toc-title">核心资产</div><div class="toc-sub">无法复制的品牌羁绊 · 23年 · 11台奥迪</div></div></div></div>
+  <div class="anim-right"><div class="toc-item"><div class="toc-num">02</div><div class="toc-text"><div class="toc-title">极限征途</div><div class="toc-sub">车轮上的世界观重塑 · 35,000公里路线</div></div></div></div>
+  <div class="anim-left"><div class="toc-item"><div class="toc-num">03</div><div class="toc-text"><div class="toc-title">核心高光</div><div class="toc-sub">跨越三万公里的回家路 · 朝圣因戈尔施塔特</div></div></div></div>
+  <div class="anim-right"><div class="toc-item"><div class="toc-num">04</div><div class="toc-text"><div class="toc-title">内容矩阵</div><div class="toc-sub">粗糙的真实碾压精致的伪装 · 8个月高黏性</div></div></div></div>
+  <div class="anim-left"><div class="toc-item" style="border-color:#C9A84C44"><div class="toc-num" style="color:#E8D5A3">05</div><div class="toc-text"><div class="toc-title">战略护航</div><div class="toc-sub">共创与互惠 · 不卑不亢的提案</div></div></div></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 3: CORE ASSET + LOYALTY (MERGED) -->
+<!-- SLIDE 3: CORE ASSET -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">01</div>
-    <div class="section-num anim-up">01</div>
-    <div class="anim-up">
-      <div class="en-label">THE LEGACY . BRAND BOND</div>
-      <div class="section-title">核心资产</div>
-      <div class="section-en">THE LEGACY . BRAND BOND</div>
-    </div>
-    <div class="gold-divider anim-left"></div>
-    <!-- 核心数据：并列展示 -->
-    <div class="stats-row anim-up" style="margin:16px 0 10px; padding:14px 0;">
-      <div class="stat-item">
-        <span class="stat-num" style="font-size:28px;">11</span><span class="stat-label">台奥迪</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num" style="font-size:28px;">23</span><span class="stat-label">年情谊</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num" style="font-size:22px;">100%</span><span class="stat-label">忠诚度</span>
-      </div>
-    </div>
-    <!-- 引用 -->
-    <div class="anim-up" style="margin:14px 0 10px;">
-      <div class="quote-block" style="margin:0; font-size:13px;">
-        无法复制的品牌羁绊 · 一个家庭的时光契约
-      </div>
-    </div>
-    <!-- 时间线（折叠展示） -->
-    <div class="anim-up" style="margin-top:10px;">
-      <div style="font-size:11px;color:#9CA3AF;letter-spacing:2px;margin-bottom:8px;font-family:'Arial',sans-serif;text-align:left;">TIMELINE . 23 YEARS</div>
-      <div class="timeline-wrap">
-        <div class="tl-item anim-left">
-          <div class="tl-dot"></div>
-          <div class="tl-year">2003</div>
-          <div class="tl-text"><strong>A4 1.8T</strong> — 第一台</div>
-        </div>
-        <div class="tl-item anim-left">
-          <div class="tl-dot"></div>
-          <div class="tl-year">2008</div>
-          <div class="tl-text"><strong>A6 L</strong> — 第4台</div>
-        </div>
-        <div class="tl-item anim-left">
-          <div class="tl-dot"></div>
-          <div class="tl-year">2015</div>
-          <div class="tl-text"><strong>A8</strong> — 第8台</div>
-        </div>
-        <div class="tl-item anim-left">
-          <div class="tl-dot gold"></div>
-          <div class="tl-year" style="color:#E8D5A3;">2026</div>
-          <div class="tl-text"><strong>A6 allroad (2004款)</strong> — 第11台，出征</div>
-        </div>
-      </div>
-    </div>
-    <!-- 核心洞察 -->
-    <div class="anim-up" style="margin-top:14px;">
-      <div class="info-card" style="border-color:#C9A84C33; margin-bottom:0;">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:6px;font-family:'Arial',sans-serif;">核心洞察 . 信任资产</div>
-        <div class="card-body" style="font-style:italic; font-size:13px; margin:0;">"他不是网红冒险家，他是每一个奥迪车主内心深处，那个渴望驾车去远方的自己。"</div>
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">01</div>
+<div class="section-num anim-up">01</div>
+<div class="anim-up">
+  <div class="en-label">THE LEGACY · BRAND BOND</div>
+  <div class="section-title">核心资产</div>
+  <div class="section-en">THE LEGACY · BRAND BOND</div>
+</div>
+<div class="gold-divider anim-left"></div>
+<!-- 核心数据并列 -->
+<div class="stats-row anim-up" style="margin:12px 0 8px;padding:10px 0;">
+  <div class="stat-item"><span class="stat-num" style="font-size:24px">11</span><span class="stat-label">台奥迪</span></div>
+  <div class="stat-item"><span class="stat-num" style="font-size:24px">23</span><span class="stat-label">年情谊</span></div>
+  <div class="stat-item"><span class="stat-num" style="font-size:19px">100%</span><span class="stat-label">忠诚度</span></div>
+</div>
+<div class="anim-up" style="margin:10px 0 8px;">
+  <div class="quote-block" style="margin:0;font-size:12px">无法复制的品牌羁绊 · 一个家庭的时光契约</div>
+</div>
+<div class="anim-up" style="margin-top:8px;">
+  <div style="font-size:10px;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:6px;font-family:Arial,sans-serif;text-align:left;">TIMELINE · 23 YEARS</div>
+  <div class="timeline-wrap">
+    <div class="tl-item anim-left"><div class="tl-dot"></div><div class="tl-year">2003</div><div class="tl-text"><strong>A4 1.8T</strong> — 第一台</div></div>
+    <div class="tl-item anim-left"><div class="tl-dot"></div><div class="tl-year">2008</div><div class="tl-text"><strong>A6 L</strong> — 第4台</div></div>
+    <div class="tl-item anim-left"><div class="tl-dot"></div><div class="tl-year">2015</div><div class="tl-text"><strong>A8</strong> — 第8台</div></div>
+    <div class="tl-item anim-left"><div class="tl-dot gold"></div><div class="tl-year" style="color:#E8D5A3">2026</div><div class="tl-text"><strong>A6 allroad (2004款)</strong> — 第11台，出征</div></div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up" style="margin-top:10px;">
+  <div class="info-card" style="border-color:#C9A84C33;margin-bottom:0;padding:11px 12px">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:5px;font-family:Arial,sans-serif">核心洞察 · 信任资产</div>
+    <div class="card-body" style="font-style:italic;font-size:12px;margin:0">"他不是网红冒险家，他是每一个奥迪车主内心深处，那个渴望驾车去远方的自己。"</div>
+  </div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 5: FAMILY -->
+<!-- SLIDE 4: FAMILY -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">01</div>
-    <div class="section-num anim-up">01</div>
-    <div class="anim-up">
-      <div class="en-label">FAMILY PORTRAIT . 主角画像</div>
-      <div class="section-title" style="font-size:20px;">非典型"特种兵"</div>
-      <div class="section-en">沉稳守序的奥迪精神代言人</div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">01</div>
+<div class="section-num anim-up">01</div>
+<div class="anim-up">
+  <div class="en-label">FAMILY PORTRAIT · 主角画像</div>
+  <div class="section-title" style="font-size:17px">非典型"特种兵"</div>
+  <div class="section-en">沉稳守序的奥迪精神代言人</div>
+</div>
+<div style="margin-top:12px;">
+  <div class="anim-left"><div class="family-card">
+    <div class="family-avatar">🧔</div>
+    <div class="family-info"><div class="family-name">父亲 · 50岁</div>
+      <div class="family-desc">退役军人 · 前金融高管<br>沉稳克制，极强危机处理能力<br>不盲从喧嚣，只信纯粹机械素养<br><span style="color:#C9A84C">奥迪核心用户群代表 · 11次坚定选择</span></div>
     </div>
-    <div style="margin-top:16px;">
-      <div class="anim-left"><div class="family-card">
-        <div class="family-avatar">..</div>
-        <div class="family-info">
-          <div class="family-name">父亲 . 50岁</div>
-          <div class="family-desc">退役军人 . 前金融高管<br>.. 沉稳克制，极强危机处理能力<br>.. 不盲从喧嚣，只信纯粹机械素养<br>.. <span style="color:#C9A84C;">奥迪核心用户群代表 . 11次坚定选择</span></div>
-        </div>
-      </div></div>
-      <div class="anim-right"><div class="family-card">
-        <div class="family-avatar" style="background:#C9A84C;">..</div>
-        <div class="family-info">
-          <div class="family-name">母亲</div>
-          <div class="family-desc">前文旅集团高管 . 辞职记录者<br>.. 卸下职场光环，用细腻视角记录<br>.. 异国烟火与突发状况的镜头眼<br>.. <span style="color:#C9A84C;">引发全网女性共鸣的真实声音</span></div>
-        </div>
-      </div></div>
-      <div class="anim-left"><div class="family-card">
-        <div class="family-avatar" style="background:#1A1A1A;">..</div>
-        <div class="family-info">
-          <div class="family-name">儿子 . 7岁</div>
-          <div class="family-desc">休学探索者<br>.. 在后座完成地理与人文启蒙<br>.. 用儿童视角记录三大洲见闻<br>.. <span style="color:#C9A84C;">最真实的家庭公路教育实践</span></div>
-        </div>
-      </div></div>
+  </div></div>
+  <div class="anim-right"><div class="family-card">
+    <div class="family-avatar" style="background:#C9A84C">👩</div>
+    <div class="family-info"><div class="family-name">母亲</div>
+      <div class="family-desc">前文旅集团高管 · 辞职记录者<br>卸下职场光环，用细腻视角记录<br>异国烟火与突发状况的镜头眼<br><span style="color:#C9A84C">引发全网女性共鸣的真实声音</span></div>
     </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+  </div></div>
+  <div class="anim-left"><div class="family-card">
+    <div class="family-avatar" style="background:#1A1A1A">👦</div>
+    <div class="family-info"><div class="family-name">儿子 · 7岁</div>
+      <div class="family-desc">休学探索者<br>在后座完成地理与人文启蒙<br>用儿童视角记录三大洲见闻<br><span style="color:#C9A84C">最真实的家庭公路教育实践</span></div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 6: ROUTE TITLE -->
+<!-- SLIDE 5: ROUTE TITLE -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">02</div>
-    <div class="section-num anim-up">02</div>
-    <div class="anim-up">
-      <div class="en-label">THE ROUTE . WORLD RESHAPING</div>
-      <div class="section-title">极限征途</div>
-      <div class="section-en">THE ROUTE . WORLD RESHAPING</div>
-    </div>
-    <div class="gold-divider anim-left"></div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="quote-block" style="margin-top:0;">
-        车轮上的世界观重塑<br>一条经过验证、避开冲突区的成熟方案
-      </div>
-    </div>
-    <div class="stats-row anim-up" style="margin-top:18px;">
-      <div class="stat-item"><span class="stat-num">35,000</span><span class="stat-label">总里程(km)</span></div>
-      <div class="stat-item"><span class="stat-num">3-5</span><span class="stat-label">个月历时</span></div>
-      <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">国家</span></div>
-    </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">02</div>
+<div class="section-num anim-up">02</div>
+<div class="anim-up">
+  <div class="en-label">THE ROUTE · WORLD RESHAPING</div>
+  <div class="section-title">极限征途</div>
+  <div class="section-en">THE ROUTE · WORLD RESHAPING</div>
+</div>
+<div class="gold-divider anim-left"></div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="quote-block" style="margin-top:0;">车轮上的世界观重塑<br>一条经过验证、避开冲突区的成熟方案</div>
+</div>
+<div class="stats-row anim-up" style="margin-top:14px;">
+  <div class="stat-item"><span class="stat-num">35,000</span><span class="stat-label">总里程(km)</span></div>
+  <div class="stat-item"><span class="stat-num">3-5</span><span class="stat-label">个月历时</span></div>
+  <div class="stat-item"><span class="stat-num">20+</span><span class="stat-label">国家</span></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 7: ROUTE DETAIL -->
+<!-- SLIDE 6: ROUTE DETAIL -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">02</div>
-    <div class="anim-up">
-      <div style="font-size:20px;font-weight:800;color:#1A1A1A;letter-spacing:2px;margin-bottom:6px;text-align:left;">35,000公里路线</div>
-      <div style="font-size:11px;color:#9CA3AF;margin-bottom:18px;letter-spacing:1px;text-align:left;font-family:'Arial',sans-serif;">ASIA . EUROPE . AFRICA . 归途ASIA</div>
-    </div>
-    <div class="route-wrap">
-      <div class="anim-left"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 包头 . 出发</div>
-        <div class="route-detail">40.39.N 109.50.E . 起点 . 中国</div>
-      </div></div>
-      <div class="anim-right"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 满洲里 . 出境</div>
-        <div class="route-detail">中国.Russia . 正式踏上亚欧大陆桥</div>
-      </div></div>
-      <div class="anim-left"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 俄罗斯全境</div>
-        <div class="route-detail">穿越西伯利亚 . 零下20.C极寒考验</div>
-      </div></div>
-      <div class="anim-right"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 波罗的海三国</div>
-        <div class="route-detail">爱沙尼亚.拉脱维亚.立陶宛 . 欧洲东大门</div>
-      </div></div>
-      <div class="anim-left"><div class="route-item">
-        <div class="route-dot hl"></div>
-        <div class="route-name" style="color:#C9A84C;">★ 因戈尔施塔特 . 奥迪总部</div>
-        <div class="route-detail">德国 . 22年老车的朝圣之路 . 核心高光</div>
-      </div></div>
-      <div class="anim-right"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 北欧四国</div>
-        <div class="route-detail">丹麦.挪威.瑞典.芬兰 . 峡湾与极光</div>
-      </div></div>
-      <div class="anim-left"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 直布罗陀 . 渡轮入非</div>
-        <div class="route-detail">欧洲.Africa . 跨越直布罗陀海峡</div>
-      </div></div>
-      <div class="anim-right"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 撒哈拉沙漠</div>
-        <div class="route-detail">50.C高温耐受 . 极限环境验证</div>
-      </div></div>
-      <div class="anim-left"><div class="route-item">
-        <div class="route-dot"></div>
-        <div class="route-name">.. 哈萨克斯坦</div>
-        <div class="route-detail">中亚最后一站 . 草原与雪山</div>
-      </div></div>
-      <div class="anim-right"><div class="route-item" style="border-color:#C9A84C44;background:#C9A84C08;">
-        <div class="route-dot" style="background:#E8D5A3;box-shadow:0 0 10px #C9A84C55;"></div>
-        <div class="route-name" style="color:#C9A84C;font-weight:700;">.. 霍尔果斯口岸 . 入境回国</div>
-        <div class="route-detail">圆满归国 . 8个月亚欧非中亚壮游收官</div>
-      </div></div>
-    </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">02</div>
+<div class="anim-up">
+  <div style="font-size:17px;font-weight:800;color:#1A1A1A;letter-spacing:1.5px;margin-bottom:4px;text-align:left">35,000公里路线</div>
+  <div style="font-size:10px;color:#9CA3AF;margin-bottom:12px;letter-spacing:.8px;text-align:left;font-family:Arial,sans-serif">ASIA → EUROPE → AFRICA → 归途ASIA</div>
+</div>
+<div class="route-wrap">
+  <div class="anim-left"><div class="route-item"><div class="route-dot"></div><div class="route-name">📍 包头 · 出发</div><div class="route-detail">40°39′N 109°50′E · 起点 · 中国</div></div></div>
+  <div class="anim-right"><div class="route-item"><div class="route-dot"></div><div class="route-name">🚩 满洲里 · 出境</div><div class="route-detail">中国→俄罗斯 · 正式踏上亚欧大陆桥</div></div></div>
+  <div class="anim-left"><div class="route-item"><div class="route-dot"></div><div class="route-name">❄️ 俄罗斯全境</div><div class="route-detail">穿越西伯利亚 · 零下20°C极寒考验</div></div></div>
+  <div class="anim-right"><div class="route-item"><div class="route-dot"></div><div class="route-name">🌊 波罗的海三国</div><div class="route-detail">爱沙尼亚·拉脱维亚·立陶宛</div></div></div>
+  <div class="anim-left"><div class="route-item"><div class="route-dot hl"></div><div class="route-name" style="color:#C9A84C">★ 因戈尔施塔特 · 奥迪总部</div><div class="route-detail">德国 · 22年老车的朝圣之路 · 核心高光</div></div></div>
+  <div class="anim-right"><div class="route-item"><div class="route-dot"></div><div class="route-name">❄️ 北欧四国</div><div class="route-detail">丹麦·挪威·瑞典·芬兰 · 峡湾与极光</div></div></div>
+  <div class="anim-left"><div class="route-item"><div class="route-dot"></div><div class="route-name">🌊 直布罗陀 · 渡轮入非</div><div class="route-detail">欧洲→非洲 · 跨越直布罗陀海峡</div></div></div>
+  <div class="anim-right"><div class="route-item"><div class="route-dot"></div><div class="route-name">🏜️ 撒哈拉沙漠</div><div class="route-detail">50°C高温耐受 · 极限环境验证</div></div></div>
+  <div class="anim-left"><div class="route-item"><div class="route-dot"></div><div class="route-name">🐫 哈萨克斯坦</div><div class="route-detail">中亚最后一站 · 草原与雪山</div></div></div>
+  <div class="anim-right"><div class="route-item" style="border-color:#C9A84C44;background:#C9A84C08"><div class="route-dot" style="background:#E8D5A3;box-shadow:0 0 10px #C9A84C55"></div><div class="route-name" style="color:#C9A84C;font-weight:700">🏁 霍尔果斯口岸 · 入境回国</div><div class="route-detail">圆满归国 · 8个月亚欧非中亚壮游收官</div></div></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 8: CAR SPECS -->
+<!-- SLIDE 7: CAR SPECS -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">02</div>
-    <div class="anim-up">
-      <div style="font-size:20px;font-weight:800;color:#1A1A1A;letter-spacing:2px;margin-bottom:6px;text-align:left;">这台车，凭什么？</div>
-      <div style="font-size:11px;color:#9CA3AF;margin-bottom:16px;text-align:left;font-family:'Arial',sans-serif;">2004款A6 allroad . 22年德国工程底蕴</div>
-    </div>
-    <div class="spec-grid">
-      <div class="anim-up"><div class="spec-item">
-        <div class="spec-icon">..</div>
-        <div class="spec-label">quattro四驱</div>
-        <div class="spec-value">托森</div>
-        <div class="spec-detail">冰雪.泥泞.沙漠全覆盖</div>
-      </div></div>
-      <div class="anim-up"><div class="spec-item">
-        <div class="spec-icon">..</div>
-        <div class="spec-label">气压悬挂</div>
-        <div class="spec-value">4档</div>
-        <div class="spec-detail">142-200mm可调 . 0-100km/h 7.7秒</div>
-      </div></div>
-      <div class="anim-up"><div class="spec-item">
-        <div class="spec-icon">..</div>
-        <div class="spec-label">V6 2.7T</div>
-        <div class="spec-value">250匹</div>
-        <div class="spec-detail">高原低温启动出色 . 出厂2004年</div>
-      </div></div>
-      <div class="anim-up"><div class="spec-item">
-        <div class="spec-icon">..</div>
-        <div class="spec-label">车龄/底蕴</div>
-        <div class="spec-value">22年</div>
-        <div class="spec-detail">C5平台.30万公里验证</div>
-      </div></div>
-    </div>
-    <div class="anim-up" style="margin-top:18px;">
-      <div class="quote-block" style="font-size:13px;margin-bottom:0;">
-        "伟大的机器，不是永远停在车库里熠熠生辉，而是即使老去，依然敢于驶向未知的远方。"
-      </div>
-    </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">02</div>
+<div class="anim-up">
+  <div style="font-size:17px;font-weight:800;color:#1A1A1A;letter-spacing:1.5px;margin-bottom:4px;text-align:left">这台车，凭什么？</div>
+  <div style="font-size:10px;color:#9CA3AF;margin-bottom:12px;text-align:left;font-family:Arial,sans-serif">2004款A6 allroad · 22年德国工程底蕴</div>
+</div>
+<div class="spec-grid">
+  <div class="anim-up"><div class="spec-item"><div class="spec-icon">⚙️</div><div class="spec-label">quattro四驱</div><div class="spec-value">托森</div><div class="spec-detail">冰雪·泥泞·沙漠全覆盖</div></div></div>
+  <div class="anim-up"><div class="spec-item"><div class="spec-icon">🔧</div><div class="spec-label">气压悬挂</div><div class="spec-value">4档</div><div class="spec-detail">142-200mm可调</div></div></div>
+  <div class="anim-up"><div class="spec-item"><div class="spec-icon">🚀</div><div class="spec-label">V6 2.7T</div><div class="spec-value">250匹</div><div class="spec-detail">0-100km/h 7.7秒</div></div></div>
+  <div class="anim-up"><div class="spec-item"><div class="spec-icon">⏳</div><div class="spec-label">车龄/底蕴</div><div class="spec-value">22年</div><div class="spec-detail">C5平台·30万公里验证</div></div></div>
+</div>
+<div class="anim-up" style="margin-top:14px;">
+  <div class="quote-block" style="font-size:12px;margin-bottom:0">"伟大的机器，不是永远停在车库里熠熠生辉。而是即使老去，依然敢于驶向未知的远方。"</div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 9: CLIMAX -->
+<!-- SLIDE 8: CLIMAX -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">03</div>
-    <div class="section-num anim-up">03</div>
-    <div class="anim-up">
-      <div class="en-label">THE CLIMAX . HOMECOMING</div>
-      <div class="section-title">核心高光事件</div>
-      <div class="section-en">THE CLIMAX . HOMECOMING</div>
-    </div>
-    <div class="gold-divider anim-left"></div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div style="font-size:16px;font-weight:800;color:#1A1A1A;letter-spacing:1px;text-align:left;">跨越三万公里的回家路</div>
-      <div style="font-size:13px;color:#6B7280;margin-top:8px;line-height:1.8;text-align:left;">
-        因戈尔施塔特 . 德国<br><span style="color:#C9A84C;font-weight:600;">奥迪品牌发源地 . Audi Forum</span>
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:18px;">
-      <div class="info-card">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:8px;font-family:'Arial',sans-serif;">HIGHLIGHT 01 . 跨越时空的机械对话</div>
-        <div class="card-body" style="margin-top:0;">
-          历经风雪与骄阳、满身风霜的黑色A6 allroad缓缓驶入奥迪德国总部广场——22年老车.当代最先进汽车工厂=时间与科技的震撼对话。
-        </div>
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:12px;">
-      <div class="info-card">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:8px;font-family:'Arial',sans-serif;">HIGHLIGHT 02 . 最无声却最震撼的广告</div>
-        <div class="card-body" style="margin-top:0;">
-          这种"历经沧桑的纯粹"与"现代工业的精致"所产生的视觉碰撞，就是对quattro精神最无声却最震撼的广告。无需脚本，无需演员。
-        </div>
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">03</div>
+<div class="section-num anim-up">03</div>
+<div class="anim-up">
+  <div class="en-label">THE CLIMAX · HOMECOMING</div>
+  <div class="section-title">核心高光事件</div>
+  <div class="section-en">THE CLIMAX · HOMECOMING</div>
+</div>
+<div class="gold-divider anim-left"></div>
+<div class="anim-up" style="margin-top:12px;">
+  <div style="font-size:14.5px;font-weight:800;color:#1A1A1A;letter-spacing:1px;text-align:left">跨越三万公里的回家路</div>
+  <div style="font-size:12px;color:#6B7280;margin-top:6px;line-height:1.7;text-align:left">因戈尔施塔特 · 德国<br><span style="color:#C9A84C;font-weight:600">奥迪品牌发源地 · Audi Forum</span></div>
+</div>
+<div class="anim-up" style="margin-top:14px;">
+  <div class="info-card">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:6px;font-family:Arial,sans-serif">HIGHLIGHT 01 · 跨越时空的机械对话</div>
+    <div class="card-body" style="margin-top:0;font-size:12px">历经风雪与骄阳、满身风霜的黑色A6 allroad缓缓驶入奥迪德国总部广场——22年老车×当代最先进汽车工厂=时间与科技的震撼对话。</div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up" style="margin-top:10px;">
+  <div class="info-card">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:6px;font-family:Arial,sans-serif">HIGHLIGHT 02 · 最无声却最震撼的广告</div>
+    <div class="card-body" style="margin-top:0;font-size:12px">这种"历经沧桑的纯粹"与"现代工业的精致"所产生的视觉碰撞，就是对quattro精神最无声却最震撼的广告。无需脚本，无需演员。</div>
+  </div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 10: INGOLSTADT -->
+<!-- SLIDE 9: INGOLSTADT -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">03</div>
-    <div class="anim-up">
-      <div style="font-size:11px;color:#9CA3AF;letter-spacing:2px;margin-bottom:16px;font-family:'Arial',sans-serif;text-align:left;">AUDI INGOLSTADT . GERMANY</div>
-      <div style="font-size:18px;font-weight:800;color:#1A1A1A;letter-spacing:2px;margin-bottom:6px;text-align:left;">朝圣MAC因戈尔施塔特</div>
-      <div style="font-size:12px;color:#6B7280;margin-bottom:16px;line-height:1.7;text-align:left;">奥迪品牌发源地 . Audi Forum</div>
-    </div>
-    <div class="anim-up" style="margin-top:12px;">
-      <div class="info-card">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:8px;font-family:'Arial',sans-serif;">极致反差的素人朝圣</div>
-        <div class="card-body" style="margin-top:0;">
-          历经西伯利亚风雪与欧洲骄阳、满身风霜的黑色A6 allroad缓缓驶入奥迪德国总部广场——22年老车.当代最先进汽车工厂=时间与科技的震撼对话。
-        </div>
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:14px;">
-      <div class="info-card" style="background:#C9A84C08;border-color:#C9A84C33;">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:8px;font-family:'Arial',sans-serif;">HIGHLIGHT . 喝杯咖啡的邀约</div>
-        <div class="card-body" style="margin-top:0;">
-          期望在此促成一次简短温情的会面：让拥有11台奥迪的中国老兵，与当年参与研发C5时代A6的老工程师喝杯咖啡，聊聊22年的时光与3.5万公里的路况。
-        </div>
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="quote-block" style="font-size:13px;">
-        "这辆车22年前从这里诞生，22年后带着三大洲的风霜回家。"
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">03</div>
+<div class="anim-up">
+  <div style="font-size:10px;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:12px;font-family:Arial,sans-serif;text-align:left">AUDI INGOLSTADT · GERMANY</div>
+  <div style="font-size:16px;font-weight:800;color:#1A1A1A;letter-spacing:1.5px;margin-bottom:5px;text-align:left">朝圣因戈尔施塔特</div>
+  <div style="font-size:11px;color:#6B7280;margin-bottom:12px;line-height:1.6;text-align:left">奥迪品牌发源地 · Audi Forum</div>
+</div>
+<div class="anim-up" style="margin-top:10px;">
+  <div class="info-card">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:6px;font-family:Arial,sans-serif">极致反差的素人朝圣</div>
+    <div class="card-body" style="margin-top:0;font-size:12px">历经西伯利亚风雪与欧洲骄阳、满身风霜的黑色A6 allroad缓缓驶入奥迪德国总部广场——22年老车×当代最先进汽车工厂=时间与科技的震撼对话。</div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up" style="margin-top:10px;">
+  <div class="info-card" style="background:#C9A84C08;border-color:#C9A84C33">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:6px;font-family:Arial,sans-serif">HIGHLIGHT · 喝杯咖啡的邀约</div>
+    <div class="card-body" style="margin-top:0;font-size:12px">期望在此促成一次简短温情的会面：让拥有11台奥迪的中国老兵，与当年参与研发C5时代A6的老工程师喝杯咖啡，聊聊22年的时光与3.5万公里的路况。</div>
+  </div>
+</div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="quote-block" style="font-size:12px">"这辆车22年前从这里诞生，22年后带着三大洲的风霜回家。"</div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 11: TIME POSTER -->
+<!-- SLIDE 10: TIME POSTER -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">03</div>
-    <div class="anim-up">
-      <div style="font-size:19px;font-weight:800;color:#1A1A1A;letter-spacing:2px;margin-bottom:6px;text-align:left;">时间海报 . 精神信物</div>
-      <div style="font-size:11px;color:#9CA3AF;margin-bottom:16px;letter-spacing:1px;text-align:left;font-family:'Arial',sans-serif;">献给奥迪博物馆的一段真实民间传奇 . A1尺寸 . 顶级艺术微喷</div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">03</div>
+<div class="anim-up">
+  <div style="font-size:16.5px;font-weight:800;color:#1A1A1A;letter-spacing:1.5px;margin-bottom:4px;text-align:left">时间海报 · 精神信物</div>
+  <div style="font-size:10px;color:#9CA3AF;margin-bottom:12px;letter-spacing:.8px;text-align:left;font-family:Arial,sans-serif">献给奥迪博物馆的一段真实民间传奇 · A1尺寸 · 顶级艺术微喷</div>
+</div>
+<div class="anim-scale">
+<div class="poster-box">
+  <div class="poster-title">📜 TIME POSTER · 时间海报</div>
+  <div style="margin-top:10px;text-align:left">
+    <div style="margin-bottom:11px"><span style="color:#E8D5A3;font-weight:700">● 元素01</span> <span style="color:#D1D5DB">经纬度坐标</span>
+      <div style="font-size:11px;color:#9CA3AF;margin-top:4px;line-height:1.65">15个关键城市GPS精准坐标，从包头 40°39′N 到撒哈拉 31°09′N，每一个度数都是旅途的见证。</div>
     </div>
-    <div class="anim-scale">
-      <div class="poster-box">
-        <div class="poster-title">.. TIME POSTER . 时间海报</div>
-        <div style="margin-top:12px;text-align:left;">
-          <div style="margin-bottom:14px;"><span style="color:#E8D5A3;font-weight:700;">. 元素01</span> <span style="color:#D1D5DB;">经纬度坐标</span>
-            <div style="font-size:12px;color:#9CA3AF;margin-top:5px;line-height:1.7;">15个关键城市GPS精准坐标，从包头 40.39.N 到撒哈拉 31.09.N，每一个度数都是旅途的见证。</div>
-          </div>
-          <div style="margin-bottom:14px;"><span style="color:#E8D5A3;font-weight:700;">. 元素02</span> <span style="color:#D1D5DB;">边境邮戳+泥土</span>
-            <div style="font-size:12px;color:#9CA3AF;margin-top:5px;line-height:1.7;">15个国家边境出入境邮戳原件，以及 <strong>RU TR DE MA +11</strong> 西伯利亚.撒哈拉.多瑙河畔的真实泥土采样。</div>
-          </div>
-          <div><span style="color:#E8D5A3;font-weight:700;">. 工艺</span>
-            <div style="font-size:12px;color:#9CA3AF;margin-top:5px;line-height:1.7;">A1尺寸 . 顶级艺术微喷 . Gorpcore审美<br>申请奥迪博物馆民间传奇藏品</div>
-          </div>
-        </div>
-      </div>
+    <div style="margin-bottom:11px"><span style="color:#E8D5A3;font-weight:700">● 元素02</span> <span style="color:#D1D5DB">边境邮戳+泥土</span>
+      <div style="font-size:11px;color:#9CA3AF;margin-top:4px;line-height:1.65">15个国家边境出入境邮戳原件，以及 <strong>RU/TR/DE/MA +11</strong> 西伯利亚·撒哈拉·多瑙河畔的真实泥土采样。</div>
     </div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="quote-block" style="font-size:13px;margin-bottom:0;">
-        "这不是一件艺术品，这是3.5万公里的实物证明。"
-      </div>
+    <div><span style="color:#E8D5A3;font-weight:700">● 工艺</span>
+      <div style="font-size:11px;color:#9CA3AF;margin-top:4px;line-height:1.65">A1尺寸 · 顶级艺术微喷 · Gorpcore审美<br>申请奥迪博物馆民间传奇藏品</div>
     </div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+</div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="quote-block" style="font-size:12px;margin-bottom:0">"这不是一件艺术品，这是3.5万公里的实物证明。"</div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 12: CONTENT MATRIX -->
+<!-- SLIDE 11: CONTENT MATRIX -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">04</div>
-    <div class="section-num anim-up">04</div>
-    <div class="anim-up">
-      <div class="en-label">CONTENT DELIVERABLES . 8 MONTHS</div>
-      <div class="section-title">内容矩阵</div>
-      <div class="section-en">CONTENT DELIVERABLES . 8 MONTHS</div>
-    </div>
-    <div class="gold-divider anim-left"></div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="quote-block" style="margin-top:0;">
-        粗糙的真实碾压精致的伪装<br>8个月高黏性真实互动
-      </div>
-    </div>
-    <div style="margin-top:16px;">
-      <div class="anim-left"><div class="info-card">
-        <div class="card-head">
-          <div class="card-icon">..</div>
-          <div class="card-title">原生态POV Vlog</div>
-        </div>
-        <div class="card-body" style="margin-top:0;">GoPro+手机记录，摒弃精装摆拍，直面旅途不完美。日更/周更，实时跟随式陪伴。</div>
-      </div></div>
-      <div class="anim-right"><div class="info-card">
-        <div class="card-head">
-          <div class="card-icon">..</div>
-          <div class="card-title">全球"养成系"互动</div>
-        </div>
-        <div class="card-body" style="margin-top:0;">让用户跟随镜头操心签证、担心路况、见证奇迹。8个月强黏性，形成深度陪伴关系。</div>
-      </div></div>
-      <div class="anim-left"><div class="info-card">
-        <div class="card-head">
-          <div class="card-icon">..</div>
-          <div class="card-title">深度纪录片</div>
-        </div>
-        <div class="card-body" style="margin-top:0;">每月一条5-10分钟精剪，留存长尾价值。将成为奥迪品牌史上最真实的民间UGC影像库。</div>
-      </div></div>
-    </div>
-  </div>
-  <div class="gold-bottom-bar"></div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">04</div>
+<div class="section-num anim-up">04</div>
+<div class="anim-up">
+  <div class="en-label">CONTENT DELIVERABLES · 8 MONTHS</div>
+  <div class="section-title">内容矩阵</div>
+  <div class="section-en">CONTENT DELIVERABLES · 8 MONTHS</div>
+</div>
+<div class="gold-divider anim-left"></div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="quote-block" style="margin-top:0;font-size:12px">粗糙的真实碾压精致的伪装<br>8个月高黏性真实互动</div>
+</div>
+<div style="margin-top:12px;">
+  <div class="anim-left"><div class="info-card"><div class="card-head"><div class="card-icon">🎬</div><div class="card-title">原生态POV Vlog</div></div><div class="card-body" style="margin-top:0;font-size:12px">GoPro+手机记录，摒弃精装摆拍，直面旅途不完美。日更/周更，实时跟随式陪伴。</div></div></div>
+  <div class="anim-right"><div class="info-card"><div class="card-head"><div class="card-icon">🌍</div><div class="card-title">全球"养成系"互动</div></div><div class="card-body" style="margin-top:0;font-size:12px">让用户跟随镜头操心签证、担心路况、见证奇迹。8个月强黏性，形成深度陪伴关系。</div></div></div>
+  <div class="anim-left"><div class="info-card"><div class="card-head"><div class="card-icon">🎞️</div><div class="card-title">深度纪录片</div></div><div class="card-body" style="margin-top:0;font-size:12px">每月一条5-10分钟精剪，留存长尾价值。将成为奥迪品牌史上最真实的民间UGC影像库。</div></div></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 13: CONTENT DETAIL -->
+<!-- SLIDE 12: CONTENT DETAIL -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">04</div>
-    <div class="anim-up">
-      <div style="font-size:17px;font-weight:800;color:#1A1A1A;letter-spacing:2px;margin-bottom:16px;text-align:left;">标志性选题 + 多平台传播</div>
-    </div>
-    <div class="anim-up" style="margin-bottom:18px;">
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:12px;letter-spacing:1px;text-align:left;">.. 内容形式规划 . 传播策略 . 情感触点矩阵</div>
-      <div style="font-size:13px;color:#4A4A4A;line-height:2.6;text-align:left;">
-        <div style="padding-left:14px;border-left:3px solid #C9A84C44;">01 《零下20度，22年老奥迪的西伯利亚清晨冷启动》</div>
-        <div style="padding-left:14px;border-left:3px solid #C9A84C44;">02 《在异国小镇修车，这台A6帮我们交到了新朋友》</div>
-        <div style="padding-left:14px;border-left:3px solid #C9A84C44;">03 《7岁儿子眼中的撒哈拉与四个圈》</div>
-      </div>
-    </div>
-    <div class="anim-up">
-      <div style="font-size:13px;font-weight:700;color:#1A1A1A;margin-bottom:12px;letter-spacing:1px;text-align:left;">.. 多平台传播矩阵</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <span class="tag">抖音</span>
-        <span class="tag">小红书</span>
-        <span class="tag">视频号</span>
-        <span class="tag">B站</span>
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:22px;">
-      <div class="info-card" style="background:#C9A84C0A;border-color:#C9A84C33;">
-        <div class="card-body" style="color:#4A4A4A;margin-top:0;">潜移默化传递奥迪全球售后保障能力 + 车辆耐久度深植用户心智，<strong style="color:#1A1A1A;">比任何广告都更真实有力</strong>。</div>
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">04</div>
+<div class="anim-up">
+  <div style="font-size:15px;font-weight:800;color:#1A1A1A;letter-spacing:1.5px;margin-bottom:12px;text-align:left">标志性选题 + 多平台传播</div>
+</div>
+<div class="anim-up" style="margin-bottom:14px;">
+  <div style="font-size:12px;font-weight:700;color:#1A1A1A;margin-bottom:10px;letter-spacing:.8px;text-align:left">▸ 内容形式规划 · 传播策略 · 情感触点矩阵</div>
+  <div style="font-size:12px;color:#4A4A4A;line-height:2.3;text-align:left">
+    <div style="padding-left:12px;border-left:3px solid #C9A84C44;margin-bottom:6px">01 《零下20度，22年老奥迪的西伯利亚清晨冷启动》</div>
+    <div style="padding-left:12px;border-left:3px solid #C9A84C44;margin-bottom:6px">02 《在异国小镇修车，这台A6帮我们交到了新朋友》</div>
+    <div style="padding-left:12px;border-left:3px solid #C9A84C44">03 《7岁儿子眼中的撒哈拉与四个圈》</div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up">
+  <div style="font-size:12px;font-weight:700;color:#1A1A1A;margin-bottom:10px;letter-spacing:.8px;text-align:left">▸ 多平台传播矩阵</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span class="tag">抖音</span><span class="tag">小红书</span><span class="tag">视频号</span><span class="tag">B站</span>
+  </div>
+</div>
+<div class="anim-up" style="margin-top:16px;">
+  <div class="info-card" style="background:#C9A84C0A;border-color:#C9A84C33">
+    <div class="card-body" style="color:#4A4A4A;margin-top:0;font-size:12px">潜移默化传递奥迪全球售后保障能力 + 车辆耐久度深植用户心智，<strong style="color:#1A1A1A">比任何广告都更真实有力</strong>。</div>
+  </div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 14: STRATEGIC PARTNERSHIP -->
+<!-- SLIDE 13: STRATEGIC PARTNERSHIP -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">05</div>
-    <div class="section-num anim-up">05</div>
-    <div class="anim-up">
-      <div class="en-label">THE WIN-WIN REQUEST . PARTNERSHIP</div>
-      <div class="section-title">战略护航</div>
-      <div class="section-en">THE WIN-WIN REQUEST . PARTNERSHIP</div>
-    </div>
-    <div class="gold-divider anim-left"></div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="quote-block" style="margin-top:0;">
-        共创与互惠<br>不卑不亢的提案
-      </div>
-    </div>
-    <div style="margin-top:16px;">
-      <div class="anim-left"><div class="info-card">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:10px;font-family:'Arial',sans-serif;">REQUEST 01 . 核心痛点 . 全球服务网络绿灯</div>
-        <div class="card-body" style="margin-top:0;">我们不需要奥迪为我们的生活费买单，这是我们的家庭梦想。我们期待的是奥迪成为这趟冒险的"隐形守护者"——请求协调欧亚非沿线官方售后网络，在老车面临突发技术瓶颈或罕见配件缺失时，提供紧急诊断与绿色调拨通道。</div>
-        <div style="font-size:11px;color:#C9A84C;margin-top:12px;text-align:left;">.. 回报：全程记录奥迪全球体系的专业与温度，真实呈现品牌服务价值</div>
-      </div></div>
-      <div class="anim-right"><div class="info-card">
-        <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:10px;font-family:'Arial',sans-serif;">REQUEST 02 . 官方流量的火种</div>
-        <div class="card-body" style="margin-top:0;">在关键节点（出境、抵达德国总部、跨越直布罗陀）期望奥迪官方社交矩阵给予流量扶持和联合宣发。</div>
-        <div style="font-size:11px;color:#C9A84C;margin-top:12px;text-align:left;">.. 回报：无偿提供最真实的UGC影像素材供官方使用，无版权限制</div>
-      </div></div>
-    </div>
-    <div class="anim-up" style="margin-top:16px;">
-      <div class="info-card" style="background:#C9A84C08;border-color:#C9A84C33;">
-        <div style="font-size:11px;color:#C9A84C;letter-spacing:1px;margin-bottom:10px;font-weight:700;">合作价值 . 奥迪将获得</div>
-        <div style="font-size:13px;color:#4A4A4A;line-height:2;">
-          <div>.. 23年忠诚用户背书 . 不可复制的真实信任</div>
-          <div>.. 35,000公里内容素材库 . 三大洲珍贵影像资产</div>
-          <div>.. quattro精神最硬核注解 . 无需预算的自费验证</div>
-        </div>
-      </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">05</div>
+<div class="section-num anim-up">05</div>
+<div class="anim-up">
+  <div class="en-label">THE WIN-WIN REQUEST · PARTNERSHIP</div>
+  <div class="section-title">战略护航</div>
+  <div class="section-en">THE WIN-WIN REQUEST · PARTNERSHIP</div>
+</div>
+<div class="gold-divider anim-left"></div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="quote-block" style="margin-top:0;font-size:12px">共创与互惠<br>不卑不亢的提案</div>
+</div>
+<div style="margin-top:12px;">
+  <div class="anim-left"><div class="info-card">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;font-family:Arial,sans-serif">REQUEST 01 · 全球服务网络绿灯（核心痛点）</div>
+    <div class="card-body" style="margin-top:0;font-size:11.5px">我们不需要奥迪为我们的生活费买单，这是我们的家庭梦想。我们期待的是奥迪成为这趟冒险的"隐形守护者"——请求协调欧亚非沿线官方售后网络，在老车面临突发技术瓶颈或罕见配件缺失时，提供紧急诊断与绿色调拨通道。</div>
+    <div style="font-size:10px;color:#C9A84C;margin-top:9px;text-align:left">▸ 回报：全程记录奥迪全球体系的专业与温度，真实呈现品牌服务价值</div>
+  </div></div>
+  <div class="anim-right"><div class="info-card">
+    <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;font-family:Arial,sans-serif">REQUEST 02 · 官方流量的火种</div>
+    <div class="card-body" style="margin-top:0;font-size:11.5px">在关键节点（出境、抵达德国总部、跨越直布罗陀）期望奥迪官方社交矩阵给予流量扶持和联合宣发。</div>
+    <div style="font-size:10px;color:#C9A84C;margin-top:9px;text-align:left">▸ 回报：无偿提供最真实的UGC影像素材供官方使用，无版权限制</div>
+  </div></div>
+</div>
+<div class="anim-up" style="margin-top:12px;">
+  <div class="info-card" style="background:#C9A84C08;border-color:#C9A84C33">
+    <div style="font-size:10px;color:#C9A84C;letter-spacing:1px;margin-bottom:8px;font-weight:700">合作价值 · 奥迪将获得</div>
+    <div style="font-size:12px;color:#4A4A4A;line-height:1.85">
+      <div>▸ 23年忠诚用户背书 · 不可复制的真实信任</div>
+      <div>▸ 35,000公里内容素材库 · 三大洲珍贵影像资产</div>
+      <div>▸ quattro精神最硬核注解 · 无需预算的自费验证</div>
     </div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 15: SEEKING PARTNERS -->
+<!-- SLIDE 14: SEEKING PARTNERS -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner">
-    <div class="slide-num">05</div>
-    <div class="anim-up" style="text-align:center;">
-      <div style="font-size:22px;font-weight:800;color:#1A1A1A;letter-spacing:3px;margin-bottom:8px;">寻找同行者</div>
-      <div style="font-size:11px;color:#9CA3AF;letter-spacing:2px;margin-bottom:20px;font-family:'Arial',sans-serif;">35,000KM . BRAND COLLABORATION</div>
-    </div>
-    <div class="anim-up" style="margin-bottom:18px;">
-      <div style="font-size:14px;font-weight:700;color:#1A1A1A;margin-bottom:14px;text-align:left;">我们正在寻找 . 每个品类只选一个合作伙伴</div>
-      <div class="sponsor-grid">
-        <div class="anim-up"><div class="sponsor-item">
-          <div class="sponsor-icon">..</div>
-          <div class="sponsor-name">食品饮料</div>
-          <div class="sponsor-brands">伊利 . 蒙牛 . 雀巢</div>
-        </div></div>
-        <div class="anim-up"><div class="sponsor-item">
-          <div class="sponsor-icon">..</div>
-          <div class="sponsor-name">户外装备</div>
-          <div class="sponsor-brands">阿迪达斯 . 始祖鸟 . 北面 . 迪卡侬</div>
-        </div></div>
-        <div class="anim-up"><div class="sponsor-item">
-          <div class="sponsor-icon">..</div>
-          <div class="sponsor-name">汽车用品</div>
-          <div class="sponsor-brands">途虎养车 . 马牌 . 博世</div>
-        </div></div>
-        <div class="anim-up"><div class="sponsor-item">
-          <div class="sponsor-icon">..</div>
-          <div class="sponsor-name">摄影器材</div>
-          <div class="sponsor-brands">GoPro . 大疆 . 索尼</div>
-        </div></div>
-      </div>
-    </div>
-    <div class="anim-up">
-      <div style="font-size:11px;color:#C9A84C;font-weight:700;letter-spacing:1px;text-align:center;">
-        . 真实场景植入 . 多平台曝光 . 时间海报鸣谢
-      </div>
-      <div style="font-size:11px;color:#9CA3AF;margin-top:10px;text-align:center;line-height:1.7;">
-        以产品赞助为主，现金可谈<br>融入旅程中的各个场景，全方位的展现品牌价值
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner">
+<div class="slide-num">05</div>
+<div class="anim-up" style="text-align:center">
+  <div style="font-size:19px;font-weight:800;color:#1A1A1A;letter-spacing:2.5px;margin-bottom:6px">寻找同行者</div>
+  <div style="font-size:10px;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:16px;font-family:Arial,sans-serif">35,000KM · BRAND COLLABORATION</div>
+</div>
+<div class="anim-up" style="margin-bottom:14px;">
+  <div style="font-size:12.5px;font-weight:700;color:#1A1A1A;margin-bottom:12px;text-align:left">我们正在寻找 · 每个品类只选一个合作伙伴</div>
+  <div class="sponsor-grid">
+    <div class="anim-up"><div class="sponsor-item"><div class="sponsor-icon">🍺</div><div class="sponsor-name">食品饮料</div><div class="sponsor-brands">伊利 · 蒙牛 · 雀巢</div></div></div>
+    <div class="anim-up"><div class="sponsor-item"><div class="sponsor-icon">🎒</div><div class="sponsor-name">户外装备</div><div class="sponsor-brands">阿迪达斯 · 始祖鸟 · 北面</div></div></div>
+    <div class="anim-up"><div class="sponsor-item"><div class="sponsor-icon">🛠️</div><div class="sponsor-name">汽车用品</div><div class="sponsor-brands">途虎养车 · 马牌 · 博世</div></div></div>
+    <div class="anim-up"><div class="sponsor-item"><div class="sponsor-icon">📷</div><div class="sponsor-name">摄影器材</div><div class="sponsor-brands">GoPro · 大疆 · 索尼</div></div></div>
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up">
+  <div style="font-size:10px;color:#C9A84C;font-weight:700;letter-spacing:.8px;text-align:center">▸ 真实场景植入 · 多平台曝光 · 时间海报鸣谢</div>
+  <div style="font-size:10px;color:#9CA3AF;margin-top:8px;text-align:center;line-height:1.65">以产品赞助为主，现金可谈<br>融入旅程中的各个场景，全方位展现品牌价值</div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
-<!-- SLIDE 16: ENDING -->
+<!-- SLIDE 15: ENDING -->
 <div class="swiper-slide slide-dark">
-  <div class="gold-top-bar" style="background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C);"></div>
-  <div class="slide-inner" style="justify-content:center;align-items:center;text-align:center;">
-    <div class="slide-num">.</div>
-    <div class="anim-up">
-      <div style="font-size:48px;margin-bottom:22px;color:#C9A84C22;">... </div>
-    </div>
-    <div class="anim-up">
-      <div style="font-size:15px;color:#E8E6E1;line-height:2.4;max-width:320px;">
-        "伟大的车，不是永远停在车库里熠熠生辉。而是即使老去，依然敢于驶向未知的远方。"
-      </div>
-    </div>
-    <div style="flex:1;"></div>
-    <div class="anim-up" style="margin-top:24px;">
-      <div style="font-size:10px;color:#C9A84C;letter-spacing:2px;font-weight:700;margin-bottom:10px;font-family:'Arial',sans-serif;">CONTACT</div>
-      <div style="font-size:14px;color:#D1D5DB;line-height:2.4;">
-        手机：139-0472-0389<br>抖音：Wzt19922000（草原王.情怀老车）
-      </div>
-    </div>
-    <div class="anim-up" style="font-size:9px;color:#6B7280;letter-spacing:2px;font-style:italic;margin-top:20px;">
-      FAMILY ROAD TRIP . AUDI A6 ALLROAD (2004) . 2026
-    </div>
+<div class="gold-top-bar" style="background:linear-gradient(90deg,#C9A84C,#E8D5A3,#C9A84C)"></div>
+<div class="slide-inner" style="justify-content:center;align-items:center;text-align:center">
+<div class="slide-num">·</div>
+<div class="anim-up"><div style="font-size:42px;margin-bottom:18px;color:#C9A84C22">✦ ✦</div></div>
+<div class="anim-up">
+  <div style="font-size:13.5px;color:#E8E6E1;line-height:2.2;max-width:300px">
+    "伟大的车，不是永远停在车库里熠熠生辉。<br>而是即使老去，依然敢于驶向未知的远方。"
   </div>
-  <div class="gold-bottom-bar" style="background:#C9A84C22;"></div>
+</div>
+<div style="flex:1"></div>
+<div class="anim-up" style="margin-top:20px">
+  <div style="font-size:9.5px;color:#C9A84C;letter-spacing:1.5px;font-weight:700;margin-bottom:8px;font-family:Arial,sans-serif">CONTACT</div>
+  <div style="font-size:12.5px;color:#D1D5DB;line-height:2.2">手机：139-0472-0389<br>抖音：Wzt19922000（草原王·情怀老车）</div>
+</div>
+<div class="anim-up" style="font-size:8.5px;color:#6B7280;letter-spacing:1.5px;font-style:italic;margin-top:16px">FAMILY ROAD TRIP · AUDI A6 ALLROAD (2004) · 2026</div>
+</div>
+<div class="gold-bottom-bar" style="background:#C9A84C22"></div>
 </div>
 
-<!-- SLIDE 17: TO BE CONTINUED -->
+<!-- SLIDE 16: TO BE CONTINUED -->
 <div class="swiper-slide">
-  <div class="gold-top-bar"></div>
-  <div class="slide-inner" style="justify-content:center;">
-    <div class="slide-num">+1</div>
-    <div class="anim-up" style="text-align:center;">
-      <div style="font-size:30px;font-weight:800;color:#C9A84C;letter-spacing:5px;margin-bottom:24px;">未完待续</div>
-      <div style="font-size:11px;color:#9CA3AF;letter-spacing:2px;margin-bottom:20px;font-family:'Arial',sans-serif;">TO BE CONTINUED . LET'S TALK IN PERSON</div>
-    </div>
-    <div class="anim-up" style="max-width:340px;margin:0 auto;">
-      <div style="font-size:14px;color:#4A4A4A;line-height:2.2;text-align:left;">
-        这份提案，我们没提预算。<br>
-        因为我们相信，好的故事先要打动人心，而不是先谈条件。<br><br>
-        但坦白说，35,000公里、3大洲、8个月的真实记录，如果奥迪愿意在关键时刻给予一些<strong style="color:#1A1A1A;">资金支持</strong>，会让这段旅程走得更稳、记录得更完整。<br><br>
-        <span style="color:#1A1A1A;font-weight:700;">具体怎样支持、支持到什么程度，我们愿意当面聊。</span><br><br>
-        先让您看到这份诚意，再谈其余。
-      </div>
-    </div>
-    <div class="anim-up" style="margin-top:24px;text-align:center;">
-      <div style="font-size:12px;color:#9CA3AF;font-style:italic;">
-        —— 一个退役老兵的恳切请求
-      </div>
-    </div>
+<div class="gold-top-bar"></div>
+<div class="slide-inner" style="justify-content:center">
+<div class="slide-num">+1</div>
+<div class="anim-up" style="text-align:center">
+  <div style="font-size:26px;font-weight:800;color:#C9A84C;letter-spacing:4px;margin-bottom:20px">未完待续</div>
+  <div style="font-size:10px;color:#9CA3AF;letter-spacing:1.5px;margin-bottom:16px;font-family:Arial,sans-serif">TO BE CONTINUED · LET'S TALK IN PERSON</div>
+</div>
+<div class="anim-up" style="max-width:320px;margin:0 auto">
+  <div style="font-size:12.5px;color:#4A4A4A;line-height:2.1;text-align:left">
+    这份提案，我们没提预算。<br>因为我们相信，好的故事先要打动人心，而不是先谈条件。<br><br>
+    但坦白说，35,000公里、3大洲、8个月的真实记录，如果奥迪愿意在关键时刻给予一些<strong style="color:#1A1A1A">资金支持</strong>，会让这段旅程走得更稳、记录得更完整。<br><br>
+    <span style="color:#1A1A1A;font-weight:700">具体怎样支持、支持到什么程度，我们愿意当面聊。</span><br><br>
+    先让您看到这份诚意，再谈其余。
   </div>
-  <div class="gold-bottom-bar"></div>
+</div>
+<div class="anim-up" style="margin-top:20px;text-align:center">
+  <div style="font-size:11px;color:#9CA3AF;font-style:italic">—— 一个退役老兵的恳切请求</div>
+</div>
+</div>
+<div class="gold-bottom-bar"></div>
 </div>
 
 </div>
@@ -782,46 +642,40 @@ html, body { width:100%; height:100%; font-family:'PingFang SC','Hiragino Sans G
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  var total = document.querySelectorAll('.swiper-slide').length;
-  var indicator = document.getElementById('pageIndicator');
-  for (var i = 0; i < total; i++) {
-    var dot = document.createElement('div');
-    dot.className = 'page-dot' + (i === 0 ? ' active' : '');
-    dot.dataset.index = i;
+document.addEventListener('DOMContentLoaded',function(){
+  var total=document.querySelectorAll('.swiper-slide').length;
+  var indicator=document.getElementById('pageIndicator');
+  for(var i=0;i<total;i++){
+    var dot=document.createElement('div');
+    dot.className='page-dot'+(i===0?' active':'');
+    dot.dataset.index=i;
     indicator.appendChild(dot);
   }
-  var swiper = new Swiper('#mainSwiper', {
-    direction: 'vertical',
-    speed: 650,
-    mousewheel: { sensitivity: 1, thresholdDelta: 50 },
-    resistanceRatio: 0.2,
-    on: {
-      slideChange: function() {
-        var progress = ((this.activeIndex + 1) / total) * 100;
-        document.getElementById('progressFill').style.width = progress + '%';
-        var dots = document.querySelectorAll('.page-dot');
-        for (var j = 0; j < dots.length; j++) {
-          dots[j].classList.toggle('active', j === this.activeIndex);
-        }
-        var slide = this.slides[this.activeIndex];
-        var els = slide.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale');
-        for (var k = 0; k < els.length; k++) {
-          els[k].classList.add('in');
-        }
+  var swiper=new Swiper('#mainSwiper',{
+    direction:'vertical',
+    speed:550,
+    mousewheel:{sensitivity:1,thresholdDelta:40},
+    resistanceRatio:0.25,
+    slidesPerView:'auto',
+    freeMode:{enabled:false,momentum:true},
+    on:{
+      slideChange:function(){
+        var progress=((this.activeIndex+1)/total)*100;
+        document.getElementById('progressFill').style.width=progress+'%';
+        var dots=document.querySelectorAll('.page-dot');
+        for(var j=0;j<dots.length;j++) dots[j].classList.toggle('active',j===this.activeIndex);
+        var slide=this.slides[this.activeIndex];
+        var els=slide.querySelectorAll('.anim-up,.anim-left,.anim-right,.anim-scale');
+        for(var k=0;k<els.length;k++) els[k].classList.add('in');
       }
     }
   });
-  var firstSlide = document.querySelectorAll('.swiper-slide')[0];
-  var firstEls = firstSlide.querySelectorAll('.anim-up, .anim-left, .anim-right, .anim-scale');
-  setTimeout(function() {
-    for (var m = 0; m < firstEls.length; m++) {
-      firstEls[m].classList.add('in');
-    }
-  }, 100);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') swiper.slideNext();
-    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') swiper.slidePrev();
+  var firstSlide=document.querySelectorAll('.swiper-slide')[0];
+  var firstEls=firstSlide.querySelectorAll('.anim-up,.anim-left,.anim-right,.anim-scale');
+  setTimeout(function(){for(var m=0;m<firstEls.length;m++) firstEls[m].classList.add('in');},80);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowDown'||e.key==='ArrowRight') swiper.slideNext();
+    if(e.key==='ArrowUp'||e.key==='ArrowLeft') swiper.slidePrev();
   });
 });
 </script>
